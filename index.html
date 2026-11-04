@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipment, Maintenance & Stock System (V4.2 Dropdown Category)</title>
+    <title>Equipment, Maintenance & Stock System (V4.4)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -45,19 +45,19 @@
         <div class="flex flex-wrap items-center gap-5">
             <div>
                 <h1 class="text-lg font-bold text-slate-900 dark:text-white tracking-wide">Vanachai Group Public Co., Ltd.</h1>
-                <p class="text-xs text-amber-600 dark:text-amber-400 font-medium">ระบบติดตามอุปกรณ์ ลูกกลิ้ง และคลังอะไหล่ (V4.2)</p>
+                <p class="text-xs text-amber-600 dark:text-amber-400 font-medium">ระบบติดตามอุปกรณ์ ลูกกลิ้ง และคลังอะไหล่ (V4.4)</p>
             </div>
             <!-- Navigation Tabs -->
             <div class="flex bg-slate-100 dark:bg-[#1e293b] rounded-full p-1 border border-slate-300 dark:border-slate-700">
                 <button id="tabListBtn" onclick="switchView('list')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-slate-950 transition flex items-center gap-2 shadow">
-                    <i class="fa-solid fa-list-ul"></i> รายการลูกกลิ้ง/อุปกรณ์
+                    <i class="fa-solid fa-list-ul"></i> รายการอุปกรณ์
                 </button>
                 <button id="tabStockBtn" onclick="switchView('stock')" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-2">
                     <i class="fa-solid fa-boxes-stacked"></i> คลังอะไหล่ (Stock)
                     <span id="lowStockAlertBadge" class="hidden bg-rose-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">!</span>
                 </button>
                 <button id="tabDashBtn" onclick="switchView('dashboard')" class="px-4 py-1.5 rounded-full text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-2">
-                    <i class="fa-solid fa-chart-pie"></i> Dashboard
+                    <i class="fa-solid fa-chart-pie"></i> Dashboard สรุปผล
                 </button>
             </div>
         </div>
@@ -110,10 +110,8 @@
         </div>
     </section>
 
-    <!-- MAIN VIEW 1: Master-Detail Equipment List -->
+    <!-- MAIN VIEW 1: Equipment List -->
     <main id="listView" class="flex-1 px-6 py-4 grid grid-cols-1 lg:grid-cols-12 gap-5 overflow-hidden">
-        
-        <!-- Left Column: Equipment Table (7 cols) -->
         <div class="lg:col-span-7 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl flex flex-col overflow-hidden h-[calc(100vh-185px)] shadow-sm">
             <div class="px-5 py-3 border-b border-slate-200 dark:border-slate-800 flex flex-wrap justify-between items-center gap-2 bg-slate-50 dark:bg-[#151f32]">
                 <h2 class="text-sm font-bold text-amber-600 dark:text-amber-400 flex items-center gap-2">
@@ -121,12 +119,11 @@
                 </h2>
                 <div class="flex flex-wrap items-center gap-1.5 text-[11px]">
                     <button onclick="quickFilterStatus('ALL')" class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">ทั้งหมด</button>
-                    <button onclick="quickFilterStatus('อยู่ที่เครื่องจักร')" class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30">เครื่องจักร: <b id="pillInUse">0</b></button>
-                    <button onclick="quickFilterStatus('อยู่ในคลัง (พร้อมใช้งาน)')" class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">พร้อมใช้: <b id="pillReady">0</b></button>
+                    <button onclick="quickFilterStatus('อยู่ที่เครื่องจักร')" class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 border border-amber-500/30">เครื่องจักร: <b id="pillInUse">0</b></button>
+                    <button onclick="quickFilterStatus('อยู่ในคลัง (พร้อมใช้งาน)')" class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 border border-emerald-500/30">พร้อมใช้: <b id="pillReady">0</b></button>
                     <button onclick="quickFilterStatus('อยู่ระหว่างซ่อม/เคลือบ')" class="px-2 py-0.5 rounded bg-rose-500/10 text-rose-500 border border-rose-500/30">ซ่อม/เคลือบ: <b id="pillRepair">0</b></button>
                 </div>
             </div>
-            
             <div class="overflow-y-auto flex-1">
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-slate-100 dark:bg-[#0f172a] text-slate-500 dark:text-slate-400 text-xs border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
@@ -143,7 +140,6 @@
             </div>
         </div>
 
-        <!-- Right Column: Equipment Detail (5 cols) -->
         <div class="lg:col-span-5 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 rounded-xl flex flex-col overflow-hidden h-[calc(100vh-185px)] shadow-sm">
             <div class="px-5 py-3 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-[#151f32] shrink-0">
                 <h2 class="text-sm font-bold text-amber-600 dark:text-amber-400 flex items-center gap-2">
@@ -151,7 +147,7 @@
                 </h2>
                 <div class="flex items-center gap-2">
                     <span id="detailCodeBadge" class="bg-amber-500/15 border border-amber-500/50 text-amber-600 dark:text-amber-400 px-3 py-0.5 rounded text-xs font-bold">-</span>
-                    <button onclick="openEditEquipmentModal()" class="bg-blue-500/15 hover:bg-blue-500 text-blue-600 dark:text-blue-400 hover:text-white border border-blue-500/30 px-2.5 py-0.5 rounded text-xs font-semibold transition flex items-center gap-1" title="แก้ไขสเปกอุปกรณ์">
+                    <button onclick="openEditEquipmentModal()" class="bg-blue-500/15 hover:bg-blue-500 text-blue-600 dark:text-blue-400 hover:text-white border border-blue-500/30 px-2.5 py-0.5 rounded text-xs font-semibold transition flex items-center gap-1">
                         <i class="fa-solid fa-pen"></i> แก้ไขสเปก
                     </button>
                     <button onclick="deleteCurrentEquipment()" class="text-slate-400 hover:text-rose-500 text-xs px-1.5" title="ลบอุปกรณ์นี้">
@@ -161,29 +157,23 @@
             </div>
 
             <div id="detailContent" class="p-5 overflow-y-auto flex-1 space-y-4">
-                <!-- Image Preview Box -->
                 <div class="relative bg-[#090d16] border border-slate-300 dark:border-slate-800 rounded-xl h-52 shrink-0 flex items-center justify-center overflow-hidden group">
                     <img id="detailImage" src="" alt="Equipment" onclick="openSingleImagePreview(this.src, 'ภาพประจำตัวอุปกรณ์')" class="max-h-full max-w-full object-contain cursor-zoom-in transition duration-300 group-hover:scale-105">
-                    <span id="detailBrand" class="absolute bottom-3 left-3 bg-slate-900/90 border border-slate-700 text-amber-400 text-xs px-2.5 py-1 rounded font-medium">
-                        ยี่ห้อ: -
-                    </span>
+                    <span id="detailBrand" class="absolute bottom-3 left-3 bg-slate-900/90 border border-slate-700 text-amber-400 text-xs px-2.5 py-1 rounded font-medium">ยี่ห้อ: -</span>
                     <label class="absolute top-3 right-3 bg-slate-900/80 hover:bg-amber-500 text-white hover:text-slate-950 text-xs px-2.5 py-1.5 rounded-lg cursor-pointer transition flex items-center gap-1.5 border border-slate-700">
                         <i class="fa-solid fa-camera"></i> เปลี่ยนรูปหลัก
                         <input type="file" accept="image/*" class="hidden" onchange="changeEquipmentPhoto(event)">
                     </label>
                 </div>
 
-                <!-- Primary Action Button -->
                 <button onclick="openActivityModal()" class="w-full bg-[#d9a726] hover:bg-amber-500 text-slate-950 font-bold py-2.5 rounded-lg text-sm flex items-center justify-center gap-2 transition shadow-md shrink-0">
                     <i class="fa-solid fa-pen-to-square"></i> บันทึกกิจกรรมใหม่ / ส่งซ่อม / เปลี่ยนสถานะ
                 </button>
 
-                <!-- Equipment Specifications -->
                 <div class="space-y-3">
                     <div>
                         <div class="flex justify-between items-center mb-1">
                             <label class="text-xs text-slate-500 dark:text-slate-400">สเปกอุปกรณ์</label>
-                            <button onclick="openEditEquipmentModal()" class="text-[11px] text-blue-500 hover:underline"><i class="fa-solid fa-pen mr-0.5"></i>แก้ไขข้อมูล</button>
                         </div>
                         <div id="detailSpec" class="bg-slate-100 dark:bg-[#162032] border border-slate-200 dark:border-slate-800 rounded-lg px-3.5 py-2 text-sm font-bold text-slate-900 dark:text-white">-</div>
                     </div>
@@ -203,7 +193,6 @@
                     </div>
                 </div>
 
-                <!-- Visual Maintenance Timeline -->
                 <div class="pt-2">
                     <h3 class="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center justify-between mb-3">
                         <span><i class="fa-solid fa-clock-rotate-left mr-1"></i> ประวัติกิจกรรม / การซ่อม</span>
@@ -222,27 +211,21 @@
                     <span class="text-xs text-slate-500 dark:text-slate-400">รายการอะไหล่ทั้งหมดในคลัง (SKU)</span>
                     <p id="stockTotalSku" class="text-2xl font-bold text-slate-900 dark:text-white mt-1">0 รายการ</p>
                 </div>
-                <div class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center text-lg">
-                    <i class="fa-solid fa-boxes-stacked"></i>
-                </div>
+                <div class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center text-lg"><i class="fa-solid fa-boxes-stacked"></i></div>
             </div>
             <div class="bg-white dark:bg-[#111827] border border-emerald-500/30 p-4 rounded-xl shadow-sm flex items-center justify-between">
                 <div>
                     <span class="text-xs text-emerald-600 dark:text-emerald-400">อะไหล่สต็อกปกติ (พร้อมเบิกซ่อม)</span>
                     <p id="stockNormalCount" class="text-2xl font-bold text-emerald-500 mt-1">0 รายการ</p>
                 </div>
-                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-lg">
-                    <i class="fa-solid fa-check-double"></i>
-                </div>
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-lg"><i class="fa-solid fa-check-double"></i></div>
             </div>
             <div class="bg-white dark:bg-[#111827] border border-rose-500/40 p-4 rounded-xl shadow-sm flex items-center justify-between">
                 <div>
                     <span class="text-xs text-rose-500 font-semibold">อะไหล่ใกล้หมด / ต่ำกว่าจุดสั่งซื้อ (Low Stock)</span>
                     <p id="stockLowCount" class="text-2xl font-bold text-rose-500 mt-1">0 รายการ</p>
                 </div>
-                <div class="w-11 h-11 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-lg">
-                    <i class="fa-solid fa-bell"></i>
-                </div>
+                <div class="w-11 h-11 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-lg"><i class="fa-solid fa-bell"></i></div>
             </div>
         </div>
 
@@ -262,14 +245,15 @@
                 <table class="w-full text-left border-collapse text-xs">
                     <thead class="bg-slate-100 dark:bg-[#0f172a] text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
                         <tr>
+                            <th class="py-3 px-4">รูปภาพ</th>
                             <th class="py-3 px-4">รหัสอะไหล่ (Part No.)</th>
                             <th class="py-3 px-4">ชื่ออะไหล่ / สเปก</th>
                             <th class="py-3 px-4">หมวดหมู่</th>
-                            <th class="py-3 px-4">ชั้นวาง (Bin Location)</th>
-                            <th class="py-3 px-4 text-center">คงเหลือ (Qty)</th>
-                            <th class="py-3 px-4 text-center">จุดสั่งซื้อขั้นต่ำ (Min)</th>
-                            <th class="py-3 px-4">สถานะสต็อก</th>
-                            <th class="py-3 px-4 text-right">จัดการสต็อก & แก้ไข</th>
+                            <th class="py-3 px-4">ชั้นวาง</th>
+                            <th class="py-3 px-4 text-center">คงเหลือ</th>
+                            <th class="py-3 px-4 text-center">ขั้นต่ำ (Min)</th>
+                            <th class="py-3 px-4">สถานะ</th>
+                            <th class="py-3 px-4 text-right">ทำรายการ & จัดการ</th>
                         </tr>
                     </thead>
                     <tbody id="stockTableBody" class="divide-y divide-slate-200 dark:divide-slate-800"></tbody>
@@ -278,7 +262,7 @@
         </div>
     </main>
 
-    <!-- MAIN VIEW 3: Dashboard -->
+    <!-- MAIN VIEW 3: Dashboard สรุปผล -->
     <main id="dashboardView" class="hidden flex-1 px-6 py-5 space-y-6 overflow-y-auto">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 p-5 rounded-xl shadow-sm flex items-center justify-between">
@@ -312,27 +296,32 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
-            <div class="lg:col-span-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 p-5 rounded-xl">
+            <div class="lg:col-span-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col">
                 <h3 class="text-sm font-bold text-amber-500 mb-4"><i class="fa-solid fa-chart-pie mr-1"></i> สัดส่วนสถานะอุปกรณ์</h3>
-                <div class="h-64"><canvas id="statusChart"></canvas></div>
+                <div class="h-64 flex items-center justify-center"><canvas id="statusChart"></canvas></div>
             </div>
-            <div class="lg:col-span-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 p-5 rounded-xl">
-                <h3 class="text-sm font-bold text-amber-500 mb-4"><i class="fa-solid fa-industry mr-1"></i> จำนวนอุปกรณ์แยกตามจุดใช้งาน</h3>
-                <div class="h-64"><canvas id="locationChart"></canvas></div>
-            </div>
-            <div class="lg:col-span-4 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 p-5 rounded-xl">
-                <h3 class="text-sm font-bold text-rose-500 mb-3"><i class="fa-solid fa-triangle-exclamation mr-1"></i> อุปกรณ์ที่ส่งซ่อมบ่อยที่สุด (Top 5)</h3>
-                <table class="w-full text-xs text-left">
-                    <thead class="text-slate-400 border-b border-slate-200 dark:border-slate-800">
-                        <tr><th class="py-2">รหัส (Code)</th><th class="py-2">สเปก</th><th class="py-2 text-right">จำนวนซ่อม</th></tr>
-                    </thead>
-                    <tbody id="topRepairTableBody" class="divide-y divide-slate-200 dark:divide-slate-800"></tbody>
-                </table>
+
+            <div class="lg:col-span-8 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col">
+                <h3 class="text-sm font-bold text-amber-500 mb-3"><i class="fa-solid fa-industry mr-1"></i> ตารางสรุปสถานะอุปกรณ์แยกตามจุดใช้งาน (Location Summary)</h3>
+                <div class="overflow-x-auto flex-1">
+                    <table class="w-full text-xs text-left">
+                        <thead class="text-slate-400 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f172a]">
+                            <tr>
+                                <th class="py-2.5 px-3">จุดใช้งาน / Location</th>
+                                <th class="py-2.5 px-3 text-center">พร้อมใช้ในคลัง</th>
+                                <th class="py-2.5 px-3 text-center">อยู่ที่เครื่องจักร</th>
+                                <th class="py-2.5 px-3 text-center">ส่งซ่อม / รอเคลือบ</th>
+                                <th class="py-2.5 px-3 text-right">รวมทั้งหมด</th>
+                            </tr>
+                        </thead>
+                        <tbody id="locationSummaryTableBody" class="divide-y divide-slate-200 dark:divide-slate-800"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- MODAL: บันทึกกิจกรรม -->
+    <!-- MODAL: บันทึกกิจกรรมอุปกรณ์ -->
     <div id="activityModal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4 backdrop-blur-sm overflow-y-auto">
         <div class="bg-white dark:bg-[#111827] border border-slate-300 dark:border-slate-700 rounded-xl max-w-lg w-full p-6 space-y-4 shadow-2xl my-8">
             <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
@@ -361,7 +350,7 @@
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="text-slate-400 block mb-1">สถานที่ / จุดทำงานใหม่ *</label>
-                        <input type="text" id="actLocation" placeholder="เช่น IMP1, คลังสินค้า, ร้าน Vit" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white">
+                        <input type="text" id="actLocation" placeholder="เช่น IMP1, คลังสินค้า..." class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white">
                     </div>
                     <div>
                         <label class="text-slate-400 block mb-1">ผู้บันทึก / ช่างผู้รับผิดชอบ</label>
@@ -386,17 +375,17 @@
                 </div>
 
                 <div class="p-3 rounded-lg bg-slate-50 dark:bg-[#162032] border border-slate-200 dark:border-slate-800 space-y-2">
-                    <label class="font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
-                        <i class="fa-solid fa-images"></i> รูปถ่าย ก่อนซ่อม (Before) / หลังซ่อม (After)
-                    </label>
+                    <label class="font-bold text-amber-600 dark:text-amber-400">รูปถ่าย ก่อนซ่อม (Before) / หลังซ่อม (After)</label>
                     <div class="grid grid-cols-2 gap-3">
                         <div class="border border-dashed border-rose-500/50 rounded-lg p-2 text-center">
                             <span class="block text-[11px] font-bold text-rose-500 mb-1">รูปก่อนซ่อม (Before)</span>
-                            <input type="file" id="actBeforeImg" accept="image/*" class="w-full text-[10px] text-slate-400">
+                            <input type="file" id="actBeforeImg" accept="image/*" class="w-full text-[10px] text-slate-400 mb-1">
+                            <button type="button" onclick="clearFileInput('actBeforeImg')" class="text-[10px] bg-rose-500/20 hover:bg-rose-500 text-rose-500 hover:text-white px-2 py-0.5 rounded transition">ล้างรูป</button>
                         </div>
                         <div class="border border-dashed border-emerald-500/50 rounded-lg p-2 text-center">
                             <span class="block text-[11px] font-bold text-emerald-500 mb-1">รูปหลังซ่อม (After)</span>
-                            <input type="file" id="actAfterImg" accept="image/*" class="w-full text-[10px] text-slate-400">
+                            <input type="file" id="actAfterImg" accept="image/*" class="w-full text-[10px] text-slate-400 mb-1">
+                            <button type="button" onclick="clearFileInput('actAfterImg')" class="text-[10px] bg-emerald-500/20 hover:bg-emerald-500 text-emerald-500 hover:text-white px-2 py-0.5 rounded transition">ล้างรูปนี้</button>
                         </div>
                     </div>
                 </div>
@@ -413,7 +402,7 @@
         </div>
     </div>
 
-    <!-- MODAL: เพิ่มอุปกรณ์ใหม่ (Dropdown + พิมพ์เพิ่มหมวดหมู่ได้) -->
+    <!-- MODAL: เพิ่มอุปกรณ์ใหม่ -->
     <div id="addModal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4 backdrop-blur-sm">
         <div class="bg-white dark:bg-[#111827] border border-slate-300 dark:border-slate-700 rounded-xl max-w-md w-full p-6 space-y-4 shadow-2xl">
             <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
@@ -427,7 +416,7 @@
                         <input type="text" id="newCode" placeholder="เช่น AB82211" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-bold uppercase">
                     </div>
                     <div>
-                        <label class="text-slate-400 block mb-1">หมวดหมู่ (เลือกหรือพิมพ์ใหม่) *</label>
+                        <label class="text-slate-400 block mb-1">หมวดหมู่ (เลือก/พิมพ์ใหม่) *</label>
                         <input type="text" id="newCat" list="categoryListOptions" placeholder="เลือก/พิมพ์หมวดหมู่..." class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-semibold">
                         <datalist id="categoryListOptions"></datalist>
                     </div>
@@ -451,7 +440,10 @@
                     <input type="text" id="newMat" value="ROLLER กลม 200มม./ยาว 2545 มม./เหล็ก" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white">
                 </div>
                 <div>
-                    <label class="text-slate-400 block mb-1">รูปภาพอุปกรณ์</label>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-slate-400">รูปภาพอุปกรณ์</label>
+                        <button type="button" onclick="clearFileInput('newImageFile')" class="text-[10px] text-rose-500 hover:underline">ล้างรูป</button>
+                    </div>
                     <input type="file" id="newImageFile" accept="image/*" class="w-full text-xs text-slate-400">
                 </div>
             </div>
@@ -462,13 +454,11 @@
         </div>
     </div>
 
-    <!-- MODAL: แก้ไขสเปกอุปกรณ์หลัก (Dropdown + พิมพ์เพิ่มหมวดหมู่ได้) -->
+    <!-- MODAL: แก้ไขสเปกอุปกรณ์หลัก -->
     <div id="editEquipmentModal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4 backdrop-blur-sm">
         <div class="bg-white dark:bg-[#111827] border border-slate-300 dark:border-slate-700 rounded-xl max-w-md w-full p-6 space-y-4 shadow-2xl">
             <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
-                <h3 class="text-base font-bold text-blue-500 flex items-center gap-2">
-                    <i class="fa-solid fa-pen-to-square"></i> แก้ไขสเปกอุปกรณ์
-                </h3>
+                <h3 class="text-base font-bold text-blue-500 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> แก้ไขสเปกอุปกรณ์</h3>
                 <button onclick="closeEditEquipmentModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="space-y-3 text-xs">
@@ -556,7 +546,7 @@
         </div>
     </div>
 
-    <!-- MODAL: เพิ่มสต็อกอะไหล่ -->
+    <!-- MODAL: เพิ่มอะไหล่เข้าคลัง (มีปุ่มล้างรูป) -->
     <div id="addStockModal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4 backdrop-blur-sm">
         <div class="bg-white dark:bg-[#111827] border border-slate-300 dark:border-slate-700 rounded-xl max-w-md w-full p-6 space-y-4 shadow-2xl">
             <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
@@ -596,10 +586,110 @@
                     <label class="text-slate-400 block mb-1">ชั้นวาง (Bin Location)</label>
                     <input type="text" id="stkLoc" value="ชั้น A1-02" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white">
                 </div>
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-slate-400">รูปภาพอะไหล่</label>
+                        <button type="button" onclick="clearFileInput('stkImgFile')" class="text-[10px] text-rose-500 hover:underline">ล้างรูป</button>
+                    </div>
+                    <input type="file" id="stkImgFile" accept="image/*" class="w-full text-xs text-slate-400">
+                </div>
             </div>
             <div class="flex justify-end gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
                 <button onclick="closeAddStockModal()" class="px-4 py-2 rounded-lg text-xs bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">ยกเลิก</button>
                 <button onclick="addNewStockItem()" class="px-5 py-2 rounded-lg text-xs bg-emerald-500 text-slate-950 font-bold shadow">บันทึกเข้าคลัง</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: แก้ไขข้อมูลอะไหล่ในคลัง (รวมเปลี่ยนรูปได้) -->
+    <div id="editStockModal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4 backdrop-blur-sm">
+        <div class="bg-white dark:bg-[#111827] border border-slate-300 dark:border-slate-700 rounded-xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
+                <h3 class="text-base font-bold text-blue-500 flex items-center gap-2"><i class="fa-solid fa-pen-to-square"></i> แก้ไขข้อมูลอะไหล่</h3>
+                <button onclick="closeEditStockModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3 text-xs">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-slate-400 block mb-1">รหัสอะไหล่</label>
+                        <input type="text" id="editStkCode" disabled class="w-full bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-amber-500 font-bold">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">หมวดหมู่</label>
+                        <input type="text" id="editStkCat" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-semibold">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-slate-400 block mb-1">ชื่ออะไหล่ / สเปก *</label>
+                    <input type="text" id="editStkName" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white">
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <div>
+                        <label class="text-slate-400 block mb-1">คงเหลือ</label>
+                        <input type="number" id="editStkQty" min="0" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-bold">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">ขั้นต่ำ (Min)</label>
+                        <input type="number" id="editStkMin" min="0" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">หน่วยนับ</label>
+                        <input type="text" id="editStkUnit" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-slate-400 block mb-1">ชั้นวาง (Bin Location)</label>
+                    <input type="text" id="editStkLoc" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="text-slate-400">เปลี่ยนรูปภาพอะไหล่ (ถ้าต้องการ)</label>
+                        <button type="button" onclick="clearFileInput('editStkImgFile')" class="text-[10px] text-rose-500 hover:underline">ล้างรูป</button>
+                    </div>
+                    <input type="file" id="editStkImgFile" accept="image/*" class="w-full text-xs text-slate-400">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
+                <button onclick="closeEditStockModal()" class="px-4 py-2 rounded-lg text-xs bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">ยกเลิก</button>
+                <button onclick="saveEditedStockItem()" class="px-5 py-2 rounded-lg text-xs bg-blue-600 text-white font-bold hover:bg-blue-500 shadow">บันทึกการแก้ไข</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: ทำรายการเบิก / เติมอะไหล่ (รองรับเลือกวันที่ย้อนหลัง) -->
+    <div id="stockActionModal" class="fixed inset-0 bg-black/75 hidden items-center justify-center z-50 p-4 backdrop-blur-sm">
+        <div class="bg-white dark:bg-[#111827] border border-slate-300 dark:border-slate-700 rounded-xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
+                <h3 id="stockActionTitle" class="text-base font-bold text-amber-500">ทำรายการสต็อกอะไหล่</h3>
+                <button onclick="closeStockActionModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="text-slate-400 block mb-1">รหัสอะไหล่</label>
+                    <input type="text" id="actionStkCode" disabled class="w-full bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-amber-500 font-bold">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="text-slate-400 block mb-1">จำนวน <span id="actionUnitLabel"></span> *</label>
+                        <input type="number" id="actionQty" min="1" value="1" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white font-bold text-center">
+                    </div>
+                    <div>
+                        <label class="text-slate-400 block mb-1">วันที่ทำรายการ *</label>
+                        <input type="datetime-local" id="actionDate" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-2 py-2 text-slate-900 dark:text-white text-[11px]">
+                    </div>
+                </div>
+                <div>
+                    <label class="text-slate-400 block mb-1">ชื่อผู้เบิก / ผู้ทำรายการ *</label>
+                    <input type="text" id="actionUser" placeholder="ระบุชื่อช่าง/ผู้เบิก..." class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white">
+                </div>
+                <div>
+                    <label class="text-slate-400 block mb-1">หมายเหตุ / ใบงาน</label>
+                    <input type="text" id="actionNote" placeholder="เช่น ใช้ซ่อมลูกกลิ้ง AB28398" class="w-full bg-white dark:bg-[#1e293b] border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-slate-900 dark:text-white">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
+                <button onclick="closeStockActionModal()" class="px-4 py-2 rounded-lg text-xs bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">ยกเลิก</button>
+                <button onclick="confirmStockAction()" class="px-5 py-2 rounded-lg text-xs bg-amber-500 text-slate-950 font-bold shadow">ยืนยันทำรายการ</button>
             </div>
         </div>
     </div>
@@ -624,18 +714,16 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
         import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-		 
-		const firebaseConfig = {
-  			apiKey: "AIzaSyBkxc7dSa-RsQiQamMzd7QVVTy8_7J7gdI",
-  			authDomain: "equipment-inventory-system-imp.firebaseapp.com",
-  			projectId: "equipment-inventory-system-imp",
-  			storageBucket: "equipment-inventory-system-imp.firebasestorage.app",
-  			messagingSenderId: "927139719075",
-  			appId: "1:927139719075:web:24dbea19bc7b58ced49c16",
-  			measurementId: "G-1T8K11H8FW"
-		};
-
+	const firebaseConfig = {
+  		apiKey: "AIzaSyBkxc7dSa-RsQiQamMzd7QVVTy8_7J7gdI",
+  		authDomain: "equipment-inventory-system-imp.firebaseapp.com",
+  		projectId: "equipment-inventory-system-imp",
+  		storageBucket: "equipment-inventory-system-imp.firebasestorage.app",
+  		messagingSenderId: "927139719075",
+  		appId: "1:927139719075:web:24dbea19bc7b58ced49c16",
+  		measurementId: "G-1T8K11H8FW"
+	};
+        
         const sampleBeforeImg = "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80";
         const sampleAfterImg = "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80";
 
@@ -654,18 +742,19 @@
         ];
 
         const initialStockData = [
-            { partCode: "BRG-1209", name: "ตลับลูกปืน SKF 1209", category: "Bearing", location: "ชั้น A1-01", qty: 8, minQty: 4, unit: "ตลับ" },
-            { partCode: "SEAL-200", name: "ซีลกันจาระบี 200 mm.", category: "Seal / O-Ring", location: "ชั้น B2-04", qty: 15, minQty: 6, unit: "วง" }
+            { partCode: "BRG-1209", name: "ตลับลูกปืน SKF 1209", category: "Bearing", location: "ชั้น A1-01", qty: 8, minQty: 4, unit: "ตลับ", image: sampleBeforeImg },
+            { partCode: "SEAL-200", name: "ซีลกันจาระบี 200 mm.", category: "Seal / O-Ring", location: "ชั้น B2-04", qty: 15, minQty: 6, unit: "วง", image: sampleBeforeImg }
         ];
 
         let equipmentData = [];
         let stockData = [];
         let selectedCode = "AB28398";
         let activeHistoryIndex = null;
+        let currentStockAction = null;
+        let targetStockCode = null;
         let db = null;
         let isFirebaseConnected = false;
         let statusChartInstance = null;
-        let locationChartInstance = null;
 
         const hasValidConfig = firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY";
 
@@ -709,8 +798,8 @@
             connText.innerText = "โหมดจำลอง (LocalStorage)";
             fbStatusText.innerText = "สถานะ: บันทึกในเครื่อง (LocalStorage)";
 
-            const savedEq = localStorage.getItem("vanachai_eq_v42");
-            const savedStk = localStorage.getItem("vanachai_stk_v42");
+            const savedEq = localStorage.getItem("vanachai_eq_v44");
+            const savedStk = localStorage.getItem("vanachai_stk_v44");
             equipmentData = savedEq ? JSON.parse(savedEq) : initialSeedData;
             stockData = savedStk ? JSON.parse(savedStk) : initialStockData;
 
@@ -727,32 +816,41 @@
                 const idx = equipmentData.findIndex(e => e.code === item.code);
                 if (idx > -1) equipmentData[idx] = item;
                 else equipmentData.unshift(item);
-                localStorage.setItem("vanachai_eq_v42", JSON.stringify(equipmentData));
+                localStorage.setItem("vanachai_eq_v44", JSON.stringify(equipmentData));
                 updateCategoryDropdowns();
                 renderTable();
                 selectEquipment(item.code);
             }
         }
 
-        // อัปเดตรายการหมวดหมู่ทั้งหมดเข้าสู่ระบบ Dropdown และ Datalist
+        async function saveStockToDB(stkItem) {
+            if (isFirebaseConnected && db) {
+                await setDoc(doc(db, "stocks", stkItem.partCode), stkItem);
+            } else {
+                const idx = stockData.findIndex(s => s.partCode === stkItem.partCode);
+                if (idx > -1) stockData[idx] = stkItem;
+                else stockData.unshift(stkItem);
+                localStorage.setItem("vanachai_stk_v44", JSON.stringify(stockData));
+                renderStockTable();
+            }
+        }
+
+        window.clearFileInput = function(id) {
+            document.getElementById(id).value = '';
+            showToast("ล้างไฟล์รูปภาพแล้ว");
+        };
+
         window.updateCategoryDropdowns = function() {
             const categories = [...new Set(equipmentData.map(e => e.category))];
-            
-            // 1. อัปเดตตัวกรองด้านบน
             const catFilter = document.getElementById('categoryFilter');
             const currentFilterVal = catFilter.value;
             catFilter.innerHTML = `<option value="ALL">-- ทุกหมวดหมู่ --</option>`;
-            categories.forEach(cat => {
-                catFilter.innerHTML += `<option value="${cat}">${cat}</option>`;
-            });
+            categories.forEach(cat => { catFilter.innerHTML += `<option value="${cat}">${cat}</option>`; });
             catFilter.value = currentFilterVal;
 
-            // 2. อัปเดต Datalist สำหรับช่องพิมพ์/เลือกหมวดหมู่ใน Modal
             const datalist = document.getElementById('categoryListOptions');
             datalist.innerHTML = '';
-            categories.forEach(cat => {
-                datalist.innerHTML += `<option value="${cat}">`;
-            });
+            categories.forEach(cat => { datalist.innerHTML += `<option value="${cat}">`; });
         };
 
         window.seedSampleDataToDB = async function() {
@@ -762,8 +860,8 @@
             } else {
                 equipmentData = JSON.parse(JSON.stringify(initialSeedData));
                 stockData = JSON.parse(JSON.stringify(initialStockData));
-                localStorage.setItem("vanachai_eq_v42", JSON.stringify(equipmentData));
-                localStorage.setItem("vanachai_stk_v42", JSON.stringify(stockData));
+                localStorage.setItem("vanachai_eq_v44", JSON.stringify(equipmentData));
+                localStorage.setItem("vanachai_stk_v44", JSON.stringify(stockData));
                 updateCategoryDropdowns();
                 renderTable();
                 renderStockTable();
@@ -949,7 +1047,7 @@
                 await deleteDoc(doc(db, "equipments", selectedCode));
             } else {
                 equipmentData = equipmentData.filter(e => e.code !== selectedCode);
-                localStorage.setItem("vanachai_eq_v42", JSON.stringify(equipmentData));
+                localStorage.setItem("vanachai_eq_v44", JSON.stringify(equipmentData));
                 selectedCode = equipmentData[0]?.code || null;
                 updateCategoryDropdowns();
                 renderTable();
@@ -958,7 +1056,6 @@
             showToast("ลบรายการเรียบร้อย");
         };
 
-        // ฟังก์ชันพื้นฐานอื่นๆ (ซ่อม คลัง Dashboard)
         function compressImage(file, maxWidth = 600) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
@@ -1056,7 +1153,7 @@
             showToast("บันทึกกิจกรรมเรียบร้อย");
         };
 
-        // สต็อก
+        // สต็อกอะไหล่ (รองรับลบ, แก้ไข, เบิก/เติมย้อนหลัง)
         window.renderStockTable = function() {
             const search = (document.getElementById('stockSearchInput')?.value || '').toLowerCase();
             const tbody = document.getElementById('stockTableBody');
@@ -1078,64 +1175,165 @@
             filtered.forEach(stk => {
                 const isLow = stk.qty <= stk.minQty;
                 const statusBadge = isLow ? `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-500">สต็อกต่ำ</span>` : `<span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-500">ปกติ</span>`;
+                const imgTag = stk.image ? `<img src="${stk.image}" class="w-10 h-10 object-cover rounded-lg border border-slate-700">` : `<span class="text-slate-500 text-[10px]">ไม่มีรูป</span>`;
+
                 tbody.innerHTML += `
                     <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
-                        <td class="py-3 px-4 font-bold">${stk.partCode}</td>
-                        <td class="py-3 px-4">${stk.name}</td>
-                        <td class="py-3 px-4">${stk.category}</td>
-                        <td class="py-3 px-4">${stk.location}</td>
-                        <td class="py-3 px-4 text-center font-bold ${isLow ? 'text-rose-500' : 'text-emerald-500'}">${stk.qty} ${stk.unit}</td>
-                        <td class="py-3 px-4 text-center text-slate-400">${stk.minQty}</td>
-                        <td class="py-3 px-4">${statusBadge}</td>
-                        <td class="py-3 px-4 text-right space-x-1">
-                            <button onclick="adjustStock('${stk.partCode}', 1)" class="bg-emerald-500/20 text-emerald-500 px-2 py-1 rounded font-bold">+1</button>
-                            <button onclick="adjustStock('${stk.partCode}', -1)" class="bg-amber-500/20 text-amber-500 px-2 py-1 rounded font-bold">-1</button>
+                        <td class="py-2.5 px-4">${imgTag}</td>
+                        <td class="py-2.5 px-4 font-bold">${stk.partCode}</td>
+                        <td class="py-2.5 px-4">${stk.name}</td>
+                        <td class="py-2.5 px-4">${stk.category}</td>
+                        <td class="py-2.5 px-4">${stk.location}</td>
+                        <td class="py-2.5 px-4 text-center font-bold ${isLow ? 'text-rose-500' : 'text-emerald-500'}">${stk.qty} ${stk.unit}</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">${stk.minQty}</td>
+                        <td class="py-2.5 px-4">${statusBadge}</td>
+                        <td class="py-2.5 px-4 text-right space-x-1">
+                            <button onclick="openStockActionModal('${stk.partCode}', 'withdraw')" class="bg-amber-500/20 hover:bg-amber-500 text-amber-500 hover:text-slate-950 font-bold px-2.5 py-1 rounded text-xs transition">เบิก</button>
+                            <button onclick="openStockActionModal('${stk.partCode}', 'refill')" class="bg-emerald-500/20 hover:bg-emerald-500 text-emerald-500 hover:text-slate-950 font-bold px-2.5 py-1 rounded text-xs transition">เติม</button>
+                            <button onclick="openEditStockModal('${stk.partCode}')" class="bg-blue-500/20 hover:bg-blue-500 text-blue-500 hover:text-white font-bold px-2.5 py-1 rounded text-xs transition" title="แก้ไขข้อมูล/รูปภาพ"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="deleteStockItem('${stk.partCode}')" class="bg-rose-500/20 hover:bg-rose-500 text-rose-500 hover:text-white font-bold px-2 py-1 rounded text-xs transition" title="ลบรายการ"><i class="fa-solid fa-trash-can"></i></button>
                         </td>
                     </tr>
                 `;
             });
         };
 
-        window.adjustStock = async function(partCode, delta) {
+        window.openStockActionModal = function(partCode, action) {
             const stk = stockData.find(s => s.partCode === partCode);
-            if (!stk || stk.qty + delta < 0) return;
-            stk.qty += delta;
-            await saveStockToDB(stk);
-            renderStockTable();
+            if (!stk) return;
+            currentStockAction = action;
+            targetStockCode = partCode;
+
+            document.getElementById('actionStkCode').value = `${stk.partCode} (${stk.name})`;
+            document.getElementById('actionUnitLabel').innerText = `(${stk.unit})`;
+            document.getElementById('actionQty').value = 1;
+            document.getElementById('actionUser').value = '';
+            document.getElementById('actionNote').value = '';
+
+            // ตั้งค่าวันที่ปัจจุบันในรูปแบบ datetime-local
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('actionDate').value = now.toISOString().slice(0, 16);
+
+            const titleEl = document.getElementById('stockActionTitle');
+            if (action === 'withdraw') {
+                titleEl.innerHTML = `<i class="fa-solid fa-minus-circle mr-1"></i> เบิกใช้อะไหล่ออกจากคลัง`;
+            } else {
+                titleEl.innerHTML = `<i class="fa-solid fa-plus-circle mr-1"></i> เติมอะไหล่เข้าคลัง`;
+            }
+
+            document.getElementById('stockActionModal').classList.replace('hidden', 'flex');
         };
 
-        async function saveStockToDB(stkItem) {
-            if (isFirebaseConnected && db) {
-                await setDoc(doc(db, "stocks", stkItem.partCode), stkItem);
+        window.closeStockActionModal = () => document.getElementById('stockActionModal').classList.replace('flex', 'hidden');
+
+        window.confirmStockAction = async function() {
+            const qty = parseInt(document.getElementById('actionQty').value);
+            const user = document.getElementById('actionUser').value.trim();
+            const dateVal = document.getElementById('actionDate').value;
+            const note = document.getElementById('actionNote').value.trim();
+
+            if (!qty || qty <= 0) return alert('กรุณาระบุจำนวนที่ถูกต้อง');
+            if (!user) return alert('กรุณาระบุชื่อผู้เบิกหรือผู้ทำรายการ');
+
+            const stk = stockData.find(s => s.partCode === targetStockCode);
+            if (!stk) return;
+
+            const formattedDate = dateVal ? new Date(dateVal).toLocaleString('th-TH') : new Date().toLocaleString('th-TH');
+
+            if (currentStockAction === 'withdraw') {
+                if (stk.qty < qty) return alert(`สต็อกคงเหลือไม่พอ (เหลือ ${stk.qty} ${stk.unit})`);
+                stk.qty -= qty;
+                showToast(`เบิก ${stk.partCode} จำนวน ${qty} ${stk.unit} (${formattedDate}) โดยคุณ ${user} สำเร็จ`);
             } else {
-                const idx = stockData.findIndex(s => s.partCode === stkItem.partCode);
-                if (idx > -1) stockData[idx] = stkItem;
-                else stockData.unshift(stkItem);
-                localStorage.setItem("vanachai_stk_v42", JSON.stringify(stockData));
-                renderStockTable();
+                stk.qty += qty;
+                showToast(`เติม ${stk.partCode} เข้าคลังจำนวน ${qty} ${stk.unit} (${formattedDate}) โดยคุณ ${user} สำเร็จ`);
             }
-        }
+
+            closeStockActionModal();
+            await saveStockToDB(stk);
+        };
 
         window.openAddStockModal = () => document.getElementById('addStockModal').classList.replace('hidden', 'flex');
         window.closeAddStockModal = () => document.getElementById('addStockModal').classList.replace('flex', 'hidden');
+
         window.addNewStockItem = async function() {
             const partCode = document.getElementById('stkCode').value.trim().toUpperCase();
             const name = document.getElementById('stkName').value.trim();
             if (!partCode || !name) return alert('กรุณากรอกข้อมูลอะไหล่ให้ครบ');
+
+            let imgUrl = sampleBeforeImg;
+            const fileInput = document.getElementById('stkImgFile');
+            if (fileInput.files[0]) imgUrl = await compressImage(fileInput.files[0]);
+
             const newStk = {
                 partCode, name,
                 category: document.getElementById('stkCat').value.trim(),
                 qty: parseInt(document.getElementById('stkQty').value) || 0,
                 minQty: parseInt(document.getElementById('stkMin').value) || 0,
                 unit: document.getElementById('stkUnit').value.trim() || 'ชิ้น',
-                location: document.getElementById('stkLoc').value.trim() || '-'
+                location: document.getElementById('stkLoc').value.trim() || '-',
+                image: imgUrl
             };
             closeAddStockModal();
             await saveStockToDB(newStk);
             showToast("เพิ่มอะไหล่เรียบร้อย");
         };
 
-        // สลับมุมมอง
+        // ฟังก์ชันแก้ไขข้อมูลอะไหล่ในคลัง
+        window.openEditStockModal = function(partCode) {
+            const stk = stockData.find(s => s.partCode === partCode);
+            if (!stk) return;
+            targetStockCode = partCode;
+
+            document.getElementById('editStkCode').value = stk.partCode;
+            document.getElementById('editStkCat').value = stk.category;
+            document.getElementById('editStkName').value = stk.name;
+            document.getElementById('editStkQty').value = stk.qty;
+            document.getElementById('editStkMin').value = stk.minQty;
+            document.getElementById('editStkUnit').value = stk.unit;
+            document.getElementById('editStkLoc').value = stk.location;
+            document.getElementById('editStkImgFile').value = '';
+
+            document.getElementById('editStockModal').classList.replace('hidden', 'flex');
+        };
+
+        window.closeEditStockModal = () => document.getElementById('editStockModal').classList.replace('flex', 'hidden');
+
+        window.saveEditedStockItem = async function() {
+            const stk = stockData.find(s => s.partCode === targetStockCode);
+            if (!stk) return;
+
+            stk.category = document.getElementById('editStkCat').value.trim();
+            stk.name = document.getElementById('editStkName').value.trim();
+            stk.qty = parseInt(document.getElementById('editStkQty').value) || 0;
+            stk.minQty = parseInt(document.getElementById('editStkMin').value) || 0;
+            stk.unit = document.getElementById('editStkUnit').value.trim() || 'ชิ้น';
+            stk.location = document.getElementById('editStkLoc').value.trim() || '-';
+
+            const fileInput = document.getElementById('editStkImgFile');
+            if (fileInput.files[0]) {
+                stk.image = await compressImage(fileInput.files[0]);
+            }
+
+            closeEditStockModal();
+            await saveStockToDB(stk);
+            showToast(`แก้ไขข้อมูลอะไหล่ ${stk.partCode} เรียบร้อยแล้ว`);
+        };
+
+        window.deleteStockItem = async function(partCode) {
+            if (!confirm(`ยืนยันการลบอะไหล่รหัส ${partCode} ออกจากระบบ?`)) return;
+            if (isFirebaseConnected && db) {
+                await deleteDoc(doc(db, "stocks", partCode));
+            } else {
+                stockData = stockData.filter(s => s.partCode !== partCode);
+                localStorage.setItem("vanachai_stk_v44", JSON.stringify(stockData));
+                renderStockTable();
+            }
+            showToast(`ลบอะไหล่รหัส ${partCode} สำเร็จ`);
+        };
+
+        // สลับมุมมอง & Dashboard
         window.switchView = function(view) {
             const listView = document.getElementById('listView');
             const stockView = document.getElementById('stockView');
@@ -1153,7 +1351,7 @@
 
             if (view === 'list') { listView.classList.remove('hidden'); filterSec.classList.remove('hidden'); document.getElementById('tabListBtn').className = "px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-slate-950 shadow"; }
             else if (view === 'stock') { stockView.classList.remove('hidden'); document.getElementById('tabStockBtn').className = "px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-slate-950 shadow"; renderStockTable(); }
-            else { dashView.classList.remove('hidden'); document.getElementById('tabDashBtn').className = "px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-slate-950 shadow"; renderCharts(); }
+            else { dashView.classList.remove('hidden'); document.getElementById('tabDashBtn').className = "px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-slate-950 shadow"; renderDashboardContent(); }
         };
 
         function updateDashboardStats() {
@@ -1172,7 +1370,7 @@
             document.getElementById('pillRepair').innerText = repair;
         }
 
-        function renderCharts() {
+        function renderDashboardContent() {
             updateDashboardStats();
             const ready = equipmentData.filter(e => e.status === "อยู่ในคลัง (พร้อมใช้งาน)").length;
             const inUse = equipmentData.filter(e => e.status === "อยู่ที่เครื่องจักร").length;
@@ -1191,21 +1389,28 @@
             });
 
             const locMap = {};
-            equipmentData.forEach(e => { locMap[e.location] = (locMap[e.location] || 0) + 1; });
-            const ctxLoc = document.getElementById('locationChart').getContext('2d');
-            if (locationChartInstance) locationChartInstance.destroy();
-            locationChartInstance = new Chart(ctxLoc, {
-                type: 'bar',
-                data: { labels: Object.keys(locMap), datasets: [{ label: 'จำนวน (ชิ้น)', data: Object.values(locMap), backgroundColor: '#3b82f6', borderRadius: 6 }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            equipmentData.forEach(e => {
+                const loc = e.location || 'ไม่ระบุ';
+                if (!locMap[loc]) locMap[loc] = { ready: 0, inUse: 0, repair: 0, total: 0 };
+                locMap[loc].total++;
+                if (e.status === "อยู่ในคลัง (พร้อมใช้งาน)") locMap[loc].ready++;
+                else if (e.status === "อยู่ที่เครื่องจักร") locMap[loc].inUse++;
+                else locMap[loc].repair++;
             });
 
-            const topRepairs = [...equipmentData].sort((a, b) => (b.repairCount || 0) - (a.repairCount || 0)).slice(0, 5);
-            const topBody = document.getElementById('topRepairTableBody');
-            topBody.innerHTML = '';
-            topRepairs.forEach(item => {
-                topBody.innerHTML += `<tr><td class="py-2 font-bold">${item.code}</td><td class="py-2 text-slate-400">${item.spec}</td><td class="py-2 text-right font-bold text-rose-500">${item.repairCount || 0} ครั้ง</td></tr>`;
-            });
+            const locTableBody = document.getElementById('locationSummaryTableBody');
+            locTableBody.innerHTML = '';
+            for (const [loc, data] of Object.entries(locMap)) {
+                locTableBody.innerHTML += `
+                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition">
+                        <td class="py-3 px-3 font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-location-dot text-amber-500 mr-1.5"></i> ${loc}</td>
+                        <td class="py-3 px-3 text-center text-emerald-500 font-semibold">${data.ready} ชิ้น</td>
+                        <td class="py-3 px-3 text-center text-amber-500 font-semibold">${data.inUse} ชิ้น</td>
+                        <td class="py-3 px-3 text-center text-rose-500 font-semibold">${data.repair} ชิ้น</td>
+                        <td class="py-3 px-3 text-right font-bold text-slate-900 dark:text-white">${data.total} ชิ้น</td>
+                    </tr>
+                `;
+            }
         }
 
         window.quickFilterStatus = (status) => { document.getElementById('statusFilter').value = status; renderTable(); };
@@ -1247,6 +1452,20 @@
             document.getElementById('compareBeforeImg').src = src;
             document.getElementById('compareAfterImg').src = src;
             document.getElementById('comparePhotoModal').classList.replace('hidden', 'flex');
+        };
+
+        window.uploadAfterPhotoForHistory = async function(event) {
+            const file = event.target.files[0];
+            if (!file || activeHistoryIndex === null) return;
+            const item = equipmentData.find(e => e.code === selectedCode);
+            if (!item) return;
+
+            const base64 = await compressImage(file);
+            item.history[activeHistoryIndex].afterImage = base64;
+            item.image = base64;
+            document.getElementById('compareAfterImg').src = base64;
+            await saveItemToDB(item);
+            showToast("อัปเดตรูปภาพหลังซ่อม (After) เรียบร้อยแล้ว!");
         };
 
         function showToast(msg) {
